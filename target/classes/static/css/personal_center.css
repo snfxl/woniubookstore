@@ -1,0 +1,60 @@
+.main .side-bar {
+  height: 497px;
+}
+.main .my-orders .personal-center {
+  border: solid 1px #F2751F;
+  margin-bottom: 10px;
+}
+.main .my-orders .personal-center .panel-heading {
+  background-color: #F2751F;
+  color: #FFEBCD;
+}
+.main .my-orders .personal-center .panel-body .title {
+  margin-left: 14px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.main .my-orders .personal-center .panel-body .user-information .img-div {
+  margin-left: 30px;
+  width: 110px;
+  border: 1px solid;
+  padding: 5px 0;
+}
+.main .my-orders .personal-center .panel-body .user-information .img-div img {
+  width: 100px;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div {
+  margin-left: 20px;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .first,
+.main .my-orders .personal-center .panel-body .user-information .information-div .second {
+  margin-bottom: 26px;
+  color: #ACACB5;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .first span,
+.main .my-orders .personal-center .panel-body .user-information .information-div .second span {
+  color: red;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .first a,
+.main .my-orders .personal-center .panel-body .user-information .information-div .second a {
+  margin-left: 25px;
+  text-decoration: none;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .last {
+  color: #ACACB5;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .last span {
+  margin-right: 20px;
+}
+.main .my-orders .personal-center .panel-body .user-information .information-div .last span span {
+  color: red;
+  margin-right: 0;
+}
+.main .my-orders .personal-center .panel-body .change-head {
+  margin-top: 10px;
+  margin-left: 40px;
+}
+.main .my-orders .personal-center .panel-body .change-head a {
+  text-decoration: none;
+}
+/*# sourceMappingURL=./personal_center.css.map */

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>分类商品</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{css/index.css}">
+
+    <script src="../js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.引入用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.引入图书导航条  -->
+    <div th:replace="common/nav::book-nav"></div>
+    <!-- 3.引入搜索商品导航条 -->
+    <div th:replace="common/nav::search-nav"></div>
+    <!-- 4.主体部分 -->
+    <div class="row main">
+        <!-- 4.1 分类商品 -->
+        <div class="col-md-12 book-list">
+            <div class="row title">
+                [[${goodType}]]：
+            </div>
+            <!-- 将图书列表放5列 -->
+            <div class="row books">
+                <div class="col-md-2 book" th:each="good:${goods}">
+                    <div class="img_div">
+                        <img class="book_img" alt="" th:src="${good.getImage()}"/>
+                    </div>
+                    <!-- 引入图书信息-->
+                    <div th:replace="common/book_information::book-info(${good},2)"></div>
+                </div>
+            </div>
+            <!-- 图书列表分页导航条 -->
+            <nav class="page text-center text" aria-label="Page navigation row">
+                <ul class="pagination">
+
+                    <!-- 首页-->
+                    <li class="pagination">
+                        <a th:href="@{/classifyPage(type=${type})}"
+                           aria-label="Previous"><span aria-hidden="true">首页</span></a>
+                    </li>
+
+                    <!-- 上一页 pageNum!=1时才显示此标签 -->
+                    <li class="pagination" th:if="${pageNum != 1}">
+                        <a th:href="@{/classifyPage(pageNum=${pageNum - 1},type=${type})}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- 中间页 要显示5个页码  分为两种情况-->
+                    <!-- 1.当总页数小于等于5时才显示该标签
+                        直接全部显示
+                        #numbers.sequence(num1,num2)
+                        返回包含num1到num2的数的数组 包括num1和num2 -->
+                    <li th:each="i:${#numbers.sequence(1,pages)}" th:if="${pages<=5}">
+                        <a th:href="@{/classifyPage(pageNum=${i},type=${type})}"
+                           th:text="${i}"
+                           th:class="${i==pageNum ? 'active' : ''}"></a>
+                    </li>
+
+                    <!-- 2.当总页数大于5时 又有3种情况-->
+                    <!-- 2.1当前页码是1、2、3的情况下 页码显示的范围是1-5-->
+                    <li th:each="i:${#numbers.sequence(1,5)}" th:if="${pageNum<=3 && pages > 5}">
+                        <a th:href="@{/classifyPage(pageNum=${i},type=${type})}"
+                           th:text="${i}"
+                           th:class="${i==pageNum ? 'active' : ''}"></a>
+                    </li>
+
+                    <!-- 2.2当前页码是后面3页的情况下 当前显示页码范围是最后5页-->
+                    <li th:each="i:${#numbers.sequence(pages - 4,pages)}"
+                        th:if="${pageNum >= pages - 2 && pages > 5}">
+                        <a th:href="@{/classifyPage(pageNum=${i},type=${type})}"
+                           th:text="${i}"
+                           th:class="${i==pageNum ? 'active' : ''}"></a>
+                    </li>
+
+                    <!-- 2.3当前页码是 4 至倒数第4页时 当前显示页码范围是当前页码向前数2个 向后数两个-->
+                    <li th:each="i:${#numbers.sequence(pageNum - 2,pageNum + 2)}"
+                        th:if="${pageNum >= 4 && pageNum < pages - 2 && pages > 5}">
+                        <a th:href="@{/classifyPage(pageNum=${i},type=${type})}"
+                           th:text="${i}"
+                           th:class="${i==pageNum ? 'active' : ''}"></a>
+                    </li>
+
+                    <!-- 下一页 pageNum为最后一页时不显示此标签 -->
+                    <li class="pagination" th:if="${pageNum != pages}">
+                        <a th:href="@{/classifyPage(pageNum=${pageNum + 1},type=${type})}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- 尾页-->
+                    <li class="pagination">
+                        <!-- 跳转到最后一页-->
+                        <a th:href="@{/classifyPage(pageNum=${pages},type=${type})}"
+                           aria-label="Previous"><span
+                                aria-hidden="true">尾页</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- 5.引入相关服务 -->
+    <div th:replace="common/bottom::services-bottom"></div>
+    <!-- 6.页脚 -->
+    <div th:replace="common/bottom::footer"></div>
+
+    <!-- 添加购物车按钮 通过提交表单 来将数据传给后台-->
+    <form id="addGoodForm" method="post">
+    </form>
+</div>
+</body>
+</html>

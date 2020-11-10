@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>成功提交订单</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/cartGood.css" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" href="../css/success_submit_order.css" th:href="@{/css/success_submit_order.css}">
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script th:replace="common/js_code::no-repeat-click"></script>
+
+    <script>
+
+        function ensurePay(object,times) {
+
+            if (Number($("#money").val()) === Number($("#pay_money").text())) {
+
+                $(object).attr("href", "/paySuccess/" + $("#order_number").text());
+                return;
+            }
+            alert("请输入正确的价格");
+            times = 0;
+            return times;
+        }
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.当前位置 -->
+    <div th:replace="common/nav::now-position"></div>
+    <!-- 3.购物状态 -->
+    <div th:replace="common/nav::shopping-status"></div>
+    <!-- 4.生成订单 -->
+    <div class="row order-information get-order">
+        <div class="panel panel-default">
+            <div class="panel-heading title">请支付订单：</div>
+            <div class="panel-body information">
+                <!-- 订单信息-->
+                <div class="row common pay-method">
+                    <div class="panel panel-default">
+                        <!-- 进行订单支付 -->
+                        <div class="row success-order">
+                            <label for="money">支付金额：</label>
+                            <input id="money" type="text">
+                            <span style="margin-left: 0">￥</span>
+                        </div>
+                        <!-- 标题 -->
+                        <div class="panel-heading">
+                            <span>订单信息：</span>
+                        </div>
+                        <!-- 订单的详细信息 -->
+                        <div class="panel-body list-group">
+                            <li class="list-group-item">
+                                订单编号：<span id="order_number" th:text="${order.getOrderNumber()}">WN123456789123</span>
+                            </li>
+                            <li class="list-group-item">
+                                订单金额：￥<span id="pay_money" th:text="${order.getMoney()}">279.50</span>
+                            </li>
+                            <li class="list-group-item">
+                                支付方式：<span th:text="${order.getPayType() == 1 ? '支付宝' : '货到付款'}">支付宝</span>
+                            </li>
+                        </div>
+                        <!-- 进行支付 -->
+                        <div class="row pay-at-once text-center">
+                            <a id="pay" onclick="noRepeatClick(this,6)" class="btn btn-warning">
+                                确认支付
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 5.引入相关服务 -->
+    <div th:replace="common/bottom::services-bottom"></div>
+    <!-- 6.页脚 -->
+    <div th:replace="common/bottom::footer"></div>
+</div>
+</body>
+</html>

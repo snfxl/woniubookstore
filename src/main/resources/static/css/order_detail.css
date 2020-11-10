@@ -1,0 +1,47 @@
+.main .my-orders .order-detail .order-detail-body .order-information {
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+.main .my-orders .order-detail .order-detail-body .order-information .order-number,
+.main .my-orders .order-detail .order-detail-body .order-information .order-date {
+  margin-right: 15px;
+}
+.main .my-orders .order-detail .order-detail-body .order-information .order-status span {
+  color: red;
+}
+.main .my-orders .order-detail .order-detail-body .pay-button {
+  margin-left: 30px;
+}
+.main .my-orders .order-detail .order-detail-body .pay-button button {
+  margin-right: 20px;
+  outline: none;
+}
+.main .my-orders .receive-person .receive-person-body {
+  padding-bottom: 0;
+}
+.main .my-orders .receive-person .receive-person-body .table .head {
+  border-right: solid 1px #DEDEDE;
+  width: 140px;
+}
+.main .my-orders .receive-person .receive-person-body .table .last {
+  border-bottom: solid 1px #DEDEDE;
+}
+.main .my-orders .shopping-list .table .td-img img {
+  height: 80px;
+}
+.main .my-orders .shopping-list .table .price {
+  color: red;
+}
+.main .my-orders .shopping-list .table .vertical-center {
+  padding-top: 40px;
+}
+.main .my-orders .total-price {
+  height: 40px;
+  background-color: #FEF3D9;
+  padding-right: 25px;
+  padding-top: 10px;
+}
+.main .my-orders .total-price span {
+  color: red;
+}
+/*# sourceMappingURL=./order_detail.css.map */

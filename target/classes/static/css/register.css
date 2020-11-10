@@ -1,0 +1,27 @@
+body .container {
+
+  height: 440px;
+}
+
+body .container .form-signin .form-signin-heading {
+  line-height: 50px;
+  text-align: left;
+}
+body .container .form-signin .form-control label {
+  line-height: 37px;
+}
+body .container .form-signin .code .input-text {
+  width: 60%;
+}
+body .container .form-signin .code-img {
+  top: 295px;
+}
+body .container .form-signin .register-button .register {
+  height: 50px;
+  display: inline-block;
+  color: #fff;
+  background-color: #1ABC9C;
+  border-radius: 2px;
+  border: red 0px solid;
+}
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.CartMapper">
+
+    <!-- 向数据库中插入购物车-->
+    <insert id="saveCart">
+
+        insert into mall_cart set <include refid="columnName"/>
+    </insert>
+
+    <!-- 修改购物车中的数据-->
+    <update id="updateCart">
+
+        update mall_cart set  <include refid="columnName"/>
+        where id = #{id}
+    </update>
+
+
+    <!--  根据用户id查询该用户的购物车  -->
+    <select id="getCartByUserId" resultMap="getCartByUserId">
+
+        select * from mall_cart where user_id=#{userId}
+    </select>
+
+
+    <resultMap id="getCartByUserId" type="com.sn.woniubookstore.pojo.Cart">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="total_count" property="totalCount"/>
+        <result column="total_price" property="totalPrice"/>
+        <association property="cartGoods"
+                     select="com.sn.woniubookstore.mapper.CartGoodMapper.queryByCartId"
+                     column="id"/>
+    </resultMap>
+
+    <sql id="columnName">
+
+        id = #{id},
+        user_id = #{userId},
+        total_count = #{totalCount},
+        total_price = #{totalPrice}
+    </sql>
+</mapper>

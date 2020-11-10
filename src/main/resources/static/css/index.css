@@ -1,0 +1,251 @@
+.container {
+  background-color: #fff;
+}
+.container .top-nav-user {
+  margin: 20px 50px 10px 50px;
+}
+.container .top-nav-user .top-nav-user-content {
+  float: right;
+  position: relative;
+  top: 10px;
+}
+.container .top-nav-user .top-nav-user-content .line {
+  position: relative;
+  top: 10px;
+  background-color: #989898;
+  width: 0.5px;
+  height: 20px;
+}
+.container .top-nav-user .top-nav-user-content li .active {
+  background-color: transparent;
+  color: orange;
+}
+.container .top-nav-user .top-nav-user-content li a {
+  color: #D2D2D2;
+}
+.container .top-nav-user .top-nav-user-content li a:hover {
+  color: orange;
+  background-color: transparent;
+}
+.container .top-nav-book {
+  background-color: #F8761B;
+  margin-bottom: 0;
+}
+.container .top-nav-book .navbar-header a {
+  color: honeydew;
+  font-size: 16px;
+}
+.container .top-nav-book .content {
+  height: 50px !important;
+}
+.container .top-nav-book .content .classify {
+  margin-right: 420px;
+}
+.container .top-nav-book .content .classify li .active {
+  color: pink;
+}
+.container .top-nav-book .content .classify li a {
+  color: #fff;
+  font-size: 14px;
+}
+.container .top-nav-book .content .cart {
+  background-color: #F7F5F6;
+  margin: 0;
+  height: 100%;
+  padding-right: 30px;
+}
+.container .top-nav-book .content .cart img {
+  height: 100%;
+  margin-right: 5px;
+}
+.container .top-nav-book .content .cart span {
+  color: tomato;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.container .top-nav-book .content .pay {
+  position: relative;
+  left: 10px;
+  color: #F7F5F6;
+  border: 0 solid orange;
+  background-color: #F2BD58 !important;
+  outline: none;
+}
+.search-book {
+  background-color: rgba(249, 249, 249, 0.2);
+  margin-bottom: 0;
+}
+.search-book .classify {
+  position: relative;
+  left: 40px;
+  top: 11px;
+  border: 1px solid #D3D2D0;
+  border-top: 1px solid #FEE3D0;
+  height: 30px;
+  background-color: rgba(232, 232, 232, 0.2);
+  width: 200px;
+}
+.search-book .classify .open a {
+  background-color: transparent;
+}
+.search-book .classify .dropdown {
+  width: 100%;
+  height: 100%;
+}
+.search-book .classify .dropdown a {
+  width: 100%;
+  line-height: 30px;
+  text-align: center;
+  padding: 0;
+}
+.search-book .classify .dropdown a .caret {
+  margin-left: 60px;
+}
+.search-book .classify .dropdown .dropdown-menu li {
+  width: 200px;
+}
+.search-book .classify .dropdown .dropdown-menu li a {
+  padding-right: 30px;
+}
+.search-book .classify .dropdown .dropdown-menu li .active {
+  background-color: transparent;
+  color: orange;
+}
+.search-book .search {
+  position: relative;
+  left: 100px;
+  top: 1px;
+}
+.search-book .search .hot {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #9A9A9A;
+}
+.main {
+  padding: 20px 0px;
+}
+.main .book_info {
+  margin-top: 20px;
+}
+.main .book_info .book_add {
+  margin-top: 10px;
+}
+.main .book-list {
+  padding-top: 20px;
+  border: 2px solid #EBEBEB;
+  margin-right: -2px;
+  margin-bottom: -2px;
+}
+.main .book-list .title {
+  color: #F77517;
+  position: relative;
+  left: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.main .book-list .books {
+  padding: 0 20px;
+}
+.main .book-list .books .book {
+  margin-right: -2px;
+  margin-bottom: -2px;
+  overflow: hidden;
+}
+.main .book-list .books .book .img_div {
+  margin-top: 10px;
+}
+.main .book-list .books .book .book_info {
+  padding-left: 35px;
+}
+.main .book-list .books .book .book_info .sp3 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  top: 5.5px;
+}
+.main .book-list .books .book .book_add {
+  margin-bottom: 10px;
+}
+.main .hot-sale-books {
+  padding-top: 20px;
+  border: 2px solid #EBEBEB;
+}
+.main .hot-sale-books .title {
+  color: #F77517;
+  position: relative;
+  left: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.main .hot-sale-books .hot-books {
+  padding: 0 20px;
+}
+.main .hot-sale-books .hot-books .book {
+  margin-right: -2px;
+  margin-bottom: -2px;
+  overflow: hidden;
+}
+.main .hot-sale-books .hot-books .book .img_div {
+  margin-top: 10px;
+}
+.main .hot-sale-books .hot-books .book .book_info {
+  padding-left: 35px;
+}
+
+.main .hot-sale-books .hot-books .book .book_info .sp3 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  top: 5.5px;
+}
+
+.main .hot-sale-books .hot-books .book .book_add {
+  margin-bottom: 10px;
+}
+.main .page {
+  position: relative;
+  top: 8px;
+}
+.main .page .active {
+  background-color: pink;
+  color: snow;
+}
+.services {
+  margin-top: 20px;
+  border-top: 3px solid #DBDFE2;
+  border-bottom: 3px solid #DBDFE2;
+  padding-top: 10px;
+}
+.services .panel {
+  float: left;
+  margin-bottom: 0;
+  border-radius: 0;
+  border-color: transparent;
+  box-shadow: none;
+  height: 130px;
+}
+.services .panel .panel-heading {
+  margin-bottom: -20px;
+}
+.services .panel li {
+  border-color: transparent;
+  padding: 0;
+}
+.services .panel li a {
+  font-size: 11px;
+  text-decoration: none;
+}
+.footer {
+  position: relative;
+  top: -25px;
+  margin-top: 35px;
+}
+.footer span {
+  color: orange;
+}

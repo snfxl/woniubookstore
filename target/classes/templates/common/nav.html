@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 导航条 侧边栏-->
+<!-- 1.用户导航条-->
+<div class="row top-nav-user" th:fragment="user-nav">
+			<span>
+				<img src="../images/logo.png" th:src="@{/images/logo.png}" alt="">
+			</span>
+    <span class="line"></span>
+    <ul class="nav nav-pills top-nav-user-content">
+        <li><a href="#" th:href="@{/personalCenterPage}" th:class="${#strings.isEmpty(personalCenterPage)?'':'active'}">个人中心</a>
+        </li>
+        <li class="line"></li>
+        <li><a href="#" th:href="@{/myOrderPage}" th:class="${#strings.isEmpty(myOrderPage)?'':'active'}">我的订单</a></li>
+        <li class="line"></li>
+        <li><a href="#" th:href="@{/registerPage}">注册</a></li>
+        <li class="line"></li>
+        <li><a href="#" th:href="@{/loginPage}"
+               th:class="${#session.getAttribute('user').account == null ? '' : 'active'}"
+               th:text="${#session.getAttribute('user').account == null ? '登录' : '欢迎 '+ #session.getAttribute('user').account}"></a>
+        </li>
+        <li class="line"></li>
+        <li><a href="#" th:href="@{/exist}">退出</a></li>
+    </ul>
+</div>
+<!-- 2.图书导航条  -->
+<nav class="row navbar navbar-default top-nav-book" th:fragment="book-nav">
+    <!-- 导航条标题 -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" th:href="@{/getAllGoods}">首页</a>
+    </div>
+    <!-- 导航条内容 -->
+    <div class="collapse navbar-collapse content" id="bs-example-navbar-collapse-1">
+        <!-- 书籍分类 -->
+        <ul class="nav navbar-nav classify">
+            <li><a href="#" th:href="@{/classifyPage(type=1)}" th:class="${#strings.isEmpty(IT)?'':'active'}">IT技术</a>
+            </li>
+            <li><a href="#" th:href="@{/classifyPage(type=2)}"
+                   th:class="${#strings.isEmpty(story)?'':'active'}">小说文学</a></li>
+            <li><a href="#" th:href="@{/classifyPage(type=3)}"
+                   th:class="${#strings.isEmpty(history)?'':'active'}">历史传记</a></li>
+            <li><a href="#" th:href="@{/classifyPage(type=4)}" th:class="${#strings.isEmpty(life)?'':'active'}">生活</a>
+            </li>
+            <li><a href="#" th:href="@{/classifyPage(type=5)}"
+                   th:class="${#strings.isEmpty(manage)?'':'active'}">经营管理</a></li>
+        </ul>
+        <!-- 购物车 -->
+        <form class="navbar-form navbar-left cart">
+            <!-- 购物车图标 -->
+            <img src="../images/购物车-23.png" th:src="@{/images/购物车-23.png}" alt="">
+            <!-- 购物车中的商品 -->
+            购物车<span class="number" th:text="${#session.getAttribute('cart').getTotalCount()}"></span>件
+            <!-- 结算 提交表单 -->
+            <a th:href="@{/cartPage}" class="btn btn-sm btn-default pay">去结算</a>
+        </form>
+    </div>
+</nav>
+<!-- 3.搜索商品导航条-->
+<div class="row navbar navbar-default search-book" th:fragment="search-nav">
+    <!-- 商品分类 -->
+    <ul class="nav navbar-nav classify">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">全部商品分类 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#" th:href="@{/classifyPage(type=1)}"
+                       th:class="${#strings.isEmpty(IT)?'':'active'}">IT技术</a></li>
+                <li><a href="#" th:href="@{/classifyPage(type=2)}" th:class="${#strings.isEmpty(story)?'':'active'}">小说文学</a>
+                </li>
+                <li><a href="#" th:href="@{/classifyPage(type=3)}" th:class="${#strings.isEmpty(history)?'':'active'}">历史传记</a>
+                </li>
+                <li><a href="#" th:href="@{/classifyPage(type=4)}"
+                       th:class="${#strings.isEmpty(life)?'':'active'}">生活</a></li>
+                <li><a href="#" th:href="@{/classifyPage(type=5)}" th:class="${#strings.isEmpty(manage)?'':'active'}">经营管理</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- 搜索商品 -->
+    <form class="navbar-form navbar-left search" th:action="@{/searchGoodByKeywordPage}" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="输入关键字..." name="keyword">
+        </div>
+        <button type="submit" class="btn btn-default">商品搜索</button>
+        <span class="hot">热门搜索：IT</span>
+    </form>
+</div>
+<!-- 4.在购物车中当前位置导航条-->
+<nav class="row navbar navbar-default now-position" th:fragment="now-position">
+    <!-- 导航条内容 -->
+    <div class="collapse navbar-collapse content" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav">
+            <li><span>您当前位置：</span></li>
+            <li><a th:href="@{/getAllGoods}">首页</a></li>
+            <li><span> >> </span></li>
+            <li>
+                <div th:switch="${position}">
+                    <span th:case="cart" th:text="购物车" th:class="active" style="margin-left: 10px"></span>
+                    <span th:case="order" th:text="填写核对订单" th:class="active" style="margin-left: 10px"></span>
+                    <span th:case="success" th:text="成功提交订单" th:class="active" style="margin-left: 10px"></span>
+                    <span th:case="pay" th:text="请支付" th:class="active" style="margin-left: 10px"></span>
+                    <span th:case="paySuccess" th:text="支付成功" th:class="active" style="margin-left: 10px"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- 5.购物状态导航条-->
+<nav class="row navbar navbar-default shopping-status" th:fragment="shopping-status">
+    <!-- 导航条内容 -->
+    <div class="collapse navbar-collapse content" id="bs-example-navbar-collapse-3">
+        <ul class="nav navbar-nav">
+            <!-- .1 在查看购物车位置-->
+            <li th:if="${position=='cart'}" th:classappend="current-position" class="text-center"><span>1、查看购物车</span>
+            </li>
+            <li th:if="${position=='cart'}" class="text-center"><span>2、填写核对订单</span></li>
+            <li th:if="${position=='cart'}" class="last text-center"><span>3、成功提交订单</span></li>
+
+            <!-- .2 在填写订单位置-->
+            <li th:if="${position=='order'}" th:classappend="current-other-li" class="text-center">
+                <span>1、查看购物车</span>
+            </li>
+            <li th:if="${position=='order'}" th:classappend="current-position" class="text-center">
+                <span>2、填写核对订单</span>
+            </li>
+            <li th:if="${position=='order'}" class="last text-center"><span>3、成功提交订单</span></li>
+
+            <!-- 3.在成功提交订单位置-->
+            <li th:if="${position=='success'}" class="text-center"><span>1、查看购物车</span></li>
+            <li th:if="${position=='success'}" th:classappend="current-other-li" class="text-center">
+                <span>2、填写核对订单</span>
+            </li>
+            <li th:if="${position=='success'}" th:classappend="current-position" class="last text-center">
+                <span>3、成功提交订单</span>
+            </li>
+
+            <!-- 4.在支付位置-->
+            <li th:if="${position=='pay'}" th:classappend="current-position" class="text-center"><span>4、请支付</span></li>
+            <li th:if="${position=='pay'}" class="last text-center"><span>5、支付成功</span></li>
+
+            <!-- 5.在支付成功位置-->
+            <li th:if="${position=='paySuccess'}" th:classappend="current-other-li" class="text-center">
+                <span>4、请支付</span></li>
+            <li th:if="${position=='paySuccess'}" th:classappend="current-position" class="last text-center"><span>5、支付成功</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- 6.用户侧边栏-->
+<div class="col-md-3 side-bar" th:fragment="user-sidebar">
+    <div class="panel panel-default">
+        <!-- 标题 -->
+        <div class="panel-heading title text-center">
+            <h3 class="panel-title">
+                <span>
+                    <img th:src="@{/images/家.png}" alt="">
+                </span>
+                <span class="font">
+                    会员中心
+                </span>
+            </h3>
+        </div>
+        <!-- 内容 -->
+        <div class="panel-body">
+            <!-- 交易记录 -->
+            <div class="panel panel-default common">
+                <div class="panel-heading">
+                    <span>
+                        <img th:src="@{/images/记录.png}" alt="">
+                    </span>
+                    <span class="font">
+                        交易记录
+                    </span>
+                </div>
+                <!-- 我的订单 -->
+                <div class="panel-body">
+                    <a th:href="@{/myOrderPage}" class="my-order">我的订单</a>
+                </div>
+            </div>
+            <!-- 个人设置 -->
+            <div class="panel panel-default common">
+                <div class="panel-heading">
+                    <span>
+                        <img th:src="@{/images/用户.png}" alt="">
+                    </span>
+                    <span class="font">
+                        个人设置
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a th:href="@{/manageAddressPage}">地址管理</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a th:href="@{/updatePhotoPage}">修改头像</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a th:href="@{/updatePasswordPage}">修改密码</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

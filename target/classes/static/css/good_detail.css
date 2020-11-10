@@ -1,0 +1,155 @@
+.main .div-img {
+  overflow: hidden;
+}
+.main .div-img img {
+  position: relative;
+  height: 350px;
+  right: 60px;
+}
+.main .book-information .book-name {
+  font-size: 16px;
+  margin-left: 8px;
+  border-bottom: dashed 1px tomato;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.main .book-information .book-number {
+  float: right;
+}
+.main .book-information .table {
+  margin-bottom: 0;
+}
+.main .book-information .table tr td {
+  border: transparent;
+  font-size: 16px;
+}
+.main .book-information .table .information {
+  position: relative;
+  left: -80px;
+}
+.main .book-information .table .sale-price {
+  color: red;
+}
+.main .book-information .table .market-price {
+  text-decoration: line-through;
+}
+.main .book-information .table .score {
+  top: -8px;
+  left: -90px;
+}
+.main .book-information .table .score .people-has-score {
+  position: relative;
+  top: 1px;
+}
+.main .book-information .table .score img {
+  width: 40px;
+}
+.main .book-information .buy {
+  margin-left: 7.8px;
+  border: tomato solid 1px;
+  width: 800px;
+  height: 150px;
+  background-color: #FFFFE5;
+}
+.main .book-information .buy .buy-count {
+  padding-top: 20px;
+  padding-left: 30px;
+}
+.main .book-information .buy .buy-count label {
+  font-size: 20px;
+  width: 120px;
+  padding-right: 0;
+  margin-bottom: 20px;
+}
+.main .book-information .buy .buy-count .up-down {
+  padding: 0;
+  padding-left: 3px;
+}
+.main .book-information .buy .buy-count .up-down .up {
+  position: relative;
+  top: -5.18px;
+  border: 1px solid;
+  width: 11px;
+}
+.main .book-information .buy .buy-count .up-down .down {
+  position: relative;
+  top: -10.8px;
+  border: 1px solid;
+  width: 11px;
+}
+.main .book-information .buy .buy-button {
+  margin-left: 30px;
+}
+.main .book-information .buy .buy-button .btn {
+  margin-right: 30px;
+}
+.main-bottom {
+  margin-top: 20px;
+}
+.main-bottom .hot-goods .panel-heading {
+  color: orange;
+  font-size: 20px;
+  background-color: #FFFFE5;
+}
+.main-bottom .hot-goods .panel-body .img-div {
+  margin-bottom: 10px;
+}
+.main-bottom .hot-goods .panel-body .book-name {
+  position: relative;
+  left: -10px;
+  text-decoration: none;
+}
+.main-bottom .hot-goods .panel-body .book-price {
+  position: relative;
+  left: -13px;
+}
+.main-bottom .good-detail .panel {
+  border: none;
+  box-shadow: none;
+}
+.main-bottom .good-detail .panel .panel-heading {
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  padding-left: 40px;
+}
+.main-bottom .good-detail .panel .panel-heading button {
+  outline: none;
+  border: none;
+  border: 1px #C2C2C2 solid;
+  border-radius: 4px;
+  background-color: transparent;
+}
+.main-bottom .good-detail .panel .panel-heading .customer-evaluate {
+  position: absolute;
+  left: 170px;
+}
+.main-bottom .good-detail .panel .panel-heading .button-choose {
+  z-index: 2;
+  border: none;
+  position: absolute;
+  border-radius: 0;
+  padding-bottom: 9px;
+  border-top: 4px solid #FAA060;
+  border-bottom: #fff 11px solid;
+  border-left: 2px solid #FAA060;
+  border-right: 2px solid #FAA060;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  top: -1px;
+}
+.main-bottom .good-detail .panel .panel-heading .button-choose span {
+  position: relative;
+  top: 8px;
+}
+.main-bottom .good-detail .panel .panel-body {
+  z-index: 1;
+  position: absolute;
+  top: 52px;
+  border-top: 4px solid #FAA060;
+  height: 283px;
+  padding-left: 40px;
+  width: 810px;
+  top: 48px;
+}
+/*# sourceMappingURL=./good_detail.css.map */

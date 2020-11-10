@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.GoodMapper">
+
+    <!-- 修改商品-->
+    <update id="updateGood">
+
+        update mall_goods set stock=#{stock},sale_counts=#{saleCounts}
+        where id = #{id}
+    </update>
+
+    <!-- 查询所有商品-->
+    <select id="queryAll" resultType="com.sn.woniubookstore.pojo.Good">
+        select * from mall_goods
+    </select>
+
+    <!-- 查询所有热卖商品-->
+    <select id="queryHotBooks" resultType="com.sn.woniubookstore.pojo.Good">
+         select * from mall_goods where hot='是'
+    </select>
+
+    <!-- 根据类型查询商品-->
+    <select id="queryBooksByClass" resultType="com.sn.woniubookstore.pojo.Good">
+        select * from mall_goods where category=#{category}
+    </select>
+
+    <!-- 根据关键字查询商品-->
+    <select id="queryBooksByKeyword" resultType="com.sn.woniubookstore.pojo.Good">
+        select * from mall_goods where name like "%"#{keyword}"%"
+    </select>
+
+    <!-- 根据商品id查询商品-->
+    <select id="queryBookById" resultType="com.sn.woniubookstore.pojo.Good">
+        select  * from mall_goods where id = #{goodsId}
+    </select>
+</mapper>

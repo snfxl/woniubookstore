@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.OrderItemMapper">
+
+
+    <insert id="createOrderItem">
+
+        insert into mall_order_item set <include refid="columnName"/>
+    </insert>
+
+    <!-- 根据订单id删除订单项-->
+    <delete id="deleteOrderItemByOrderId">
+
+        delete from mall_order_item where order_id = #{orderId}
+    </delete>
+    <select id="queryOrderItemByOrderId" resultType="com.sn.woniubookstore.pojo.OrderItem">
+
+        select * from mall_order_item where order_id = #{orderId}
+    </select>
+
+    <sql id="columnName">
+
+        order_id = #{orderId},
+        goods_id = #{goodsId},
+        numbers = #{numbers},
+        total_price = #{totalPrice},
+        image = #{image},
+        good_name = #{goodName},
+        price = #{price}
+    </sql>
+</mapper>

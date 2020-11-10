@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/orders.css" th:href="@{/css/orders.css}">
+
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+
+        function deleteAddress(object) {
+
+            if (confirm("确认删除吗?")) {
+
+                //1.获取要修改的地址的当前行
+                var row = $(object).parent().parent();
+
+                //2.获取行中的所有的单元格
+                var tds = $(row).find("td");
+
+                //3.为表单中各项赋值
+                $("#id_delete").val($(tds).eq(0).attr("addressId"));
+
+                //4.提交表单
+                $("#delete_address").attr("action", "/deleteAddress").submit();
+            }
+        }
+
+        function updateAddress(object) {
+
+            //1.获取要修改的地址的当前行
+            var row = $(object).parent().parent();
+
+            //2.获取行中的所有的单元格
+            var tds = $(row).find("td");
+
+            //3.为表单中各项赋值
+            $("#id").val($(tds).eq(0).attr("addressId"));
+            $("#accept_name").val($(tds).eq(0).text());
+            $("#phone").val($(tds).eq(1).text());
+            $("#province").val($(tds).eq(2).text());
+            $("#city").val($(tds).eq(3).text());
+            $("#area").val($(tds).eq(4).text());
+            $("#address").val($(tds).eq(5).text());
+
+            if ($(tds).eq(6).text() == '是') {
+
+                $("#type").val('y');
+            } else {
+
+                $("#type").val('n');
+            }
+
+            //4.提交表单
+            $("#update_address").attr("action", "/updateAddressPage").submit();
+        }
+
+    </script>
+
+    <style>
+        .default-address {
+
+            color: tomato;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.引入用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.图书导航条  -->
+    <div th:replace="common/nav::book-nav"></div>
+    <!-- 3.搜索商品导航条 -->
+    <div th:replace="common/nav::search-nav"></div>
+    <!-- 4.主体部分 -->
+    <div class="main row">
+
+        <!-- 侧边栏 -->
+        <div th:replace="common/nav::user-sidebar"></div>
+        <!-- 收货地址 -->
+        <div class="col-md-9 my-orders">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a th:href="@{/addAddressPage/} + ${pages} + '/' + ${total}"
+                       style="text-decoration: none;color: tomato">
+                        收货地址(点击添加)：
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <!-- 地址列表 -->
+                    <table class="table">
+                        <div style="margin-bottom: 20px;font-size: 20px;color: deepskyblue"
+                             th:if="${not #strings.isEmpty(addressMessage)}" th:text="${addressMessage}"></div>
+                        <!-- 地址列表头 -->
+                        <tr class="text-center head">
+                            <td>收件人</td>
+                            <td>电话</td>
+                            <td>省</td>
+                            <td>市</td>
+                            <td>地区</td>
+                            <td>具体地址</td>
+                            <td>默认地址</td>
+                            <td>操作</td>
+                        </tr>
+                        <!-- 地址内容 -->
+                        <tr class="text-center" th:each="address:${addresses}">
+                            <td th:text="${address.getAcceptName()}"
+                                th:attr="addressId=${address.getId()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getPhone()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getProvince()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getCity()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getArea()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getAddress()}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td th:text="${address.getType() == 'y'?'是':'否'}"
+                                th:classappend="${address.getType() == 'y'?'default-address':''}"></td>
+                            <td>
+                                <button onclick="updateAddress(this)" class="btn btn-info" style="outline: none">修改
+                                </button>
+                                <button onclick="deleteAddress(this)" class="btn btn-danger" style="outline: none">删除
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- 分页导航条 -->
+                    <nav class="page text-center text" aria-label="Page navigation row">
+                        <ul class="pagination">
+                            <!-- 首页-->
+                            <li class="pagination">
+                                <a th:href="@{/manageAddressPage}"
+                                   aria-label="Previous"><span aria-hidden="true">首页</span></a>
+                            </li>
+
+                            <!-- 上一页 pageNum!=1时才显示此标签 -->
+                            <li class="pagination" th:if="${pageNum != 1}">
+                                <a th:href="@{/manageAddressPage(pageNum=${pageNum - 1})}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <!-- 中间页 要显示5个页码  分为两种情况-->
+                            <!-- 1.当总页数小于等于5时才显示该标签
+                                直接全部显示
+                                #numbers.sequence(num1,num2)
+                                返回包含num1到num2的数的数组 包括num1和num2 -->
+                            <li th:each="i:${#numbers.sequence(1,pages)}" th:if="${pages<=5}">
+                                <a th:href="@{/manageAddressPage(pageNum=${i})}"
+                                   th:text="${i}"
+                                   th:class="${i==pageNum ? 'active' : ''}"></a>
+                            </li>
+
+                            <!-- 2.当总页数大于5时 又有3种情况-->
+                            <!-- 2.1当前页码是1、2、3的情况下 页码显示的范围是1-5-->
+                            <li th:each="i:${#numbers.sequence(1,5)}" th:if="${pageNum<=3 && pages > 5}">
+                                <a th:href="@{/manageAddressPage(pageNum=${i})}"
+                                   th:text="${i}"
+                                   th:class="${i==pageNum ? 'active' : ''}"></a>
+                            </li>
+
+                            <!-- 2.2当前页码是后面3页的情况下 当前显示页码范围是最后5页-->
+                            <li th:each="i:${#numbers.sequence(pages - 4,pages)}"
+                                th:if="${pageNum >= pages - 2 && pages > 5}">
+                                <a th:href="@{/manageAddressPage(pageNum=${i})}"
+                                   th:text="${i}"
+                                   th:class="${i==pageNum ? 'active' : ''}"></a>
+                            </li>
+
+                            <!-- 2.3当前页码是 4 至倒数第4页时 当前显示页码范围是当前页码向前数2个 向后数两个-->
+                            <li th:each="i:${#numbers.sequence(pageNum - 2,pageNum + 2)}"
+                                th:if="${pageNum >= 4 && pageNum < pages - 2 && pages > 5}">
+                                <a th:href="@{/manageAddressPage(pageNum=${i})}"
+                                   th:text="${i}"
+                                   th:class="${i==pageNum ? 'active' : ''}"></a>
+                            </li>
+
+                            <!-- 下一页 pageNum为最后一页时不显示此标签 -->
+                            <li class="pagination" th:if="${pageNum != pages}">
+                                <a th:href="@{/manageAddressPage(pageNum=${pageNum + 1})}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+
+                            <!-- 尾页-->
+                            <li class="pagination">
+                                <!-- 跳转到最后一页-->
+                                <a th:href="@{/manageAddressPage(pageNum=${pages})}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        尾页
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 5.相关服务 -->
+    <div th:replace="common/bottom::services-bottom"></div>
+    <!-- 6.页脚 -->
+    <div th:replace="common/bottom::footer"></div>
+
+    <form id="update_address" method="post">
+        <input id="id" type="hidden" name="id">
+        <input id="accept_name" type="hidden" name="acceptName">
+        <input id="phone" type="hidden" name="phone">
+        <input id="province" type="hidden" name="province">
+        <input id="city" type="hidden" name="city">
+        <input id="area" type="hidden" name="area">
+        <input id="address" type="hidden" name="address">
+        <input id="type" type="hidden" name="type">
+        <input th:value="${pageNum}" type="hidden" name="pageNum">
+    </form>
+
+    <form id="delete_address" method="post">
+        <input type="hidden" name="_method" th:value="delete">
+        <input id="id_delete" type="hidden" name="addressId">
+        <input th:value="${pageNum}" type="hidden" name="pageNum">
+    </form>
+
+</div>
+</body>
+</html>

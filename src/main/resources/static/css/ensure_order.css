@@ -1,0 +1,135 @@
+.container .order-information .panel .title {
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.container .order-information .panel .information {
+    padding: 40px 90px 20px 90px;
+}
+
+.container .order-information .panel .information .common .panel {
+    border: none;
+    box-shadow: none;
+}
+
+.container .order-information .panel .information .common .panel .panel-heading {
+    padding: 0;
+    padding-top: 20px;
+    padding-left: 16px;
+    color: orange;
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+    border-top: 2px solid #F87317;
+}
+
+.container .order-information .panel .information .common .panel .panel-body .panel {
+    border: 1px tomato solid;
+}
+
+.container .order-information .panel .information .common .panel .panel-body .panel .panel-heading {
+    left: 20px;
+    width: 945px;
+    height: 50px;
+    position: relative;
+    color: tomato;
+    border-bottom: 1px tomato solid;
+    border-top: none;
+}
+
+.container .order-information .panel .information .pay-method {
+    height: 170px;
+}
+
+.container .order-information .panel .information .goods .panel-body {
+    border: 1px solid #C4C4C4;
+    margin-top: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.container .order-information .panel .information .goods .panel-body .panel-heading {
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #C4C4C4;
+    height: 30px;
+}
+
+.container .order-information .panel .information .goods .panel-body .panel-heading span {
+    line-height: 30px;
+    color: black;
+    border-right: 1px solid #C4C4C4;
+}
+
+.container .order-information .panel .information .goods .panel-body .panel-heading .last {
+    border-right: none;
+}
+
+.container .order-information .panel .information .goods .panel-body .list-group {
+    height: 140px;
+    margin-bottom: 0;
+}
+
+.container .order-information .panel .information .goods .panel-body .list-group li {
+    line-height: 140px;
+    border: none;
+    border-right: 1px solid #C4C4C4;
+    border-radius: 0;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.container .order-information .panel .information .goods .panel-body .list-group li .img {
+    height: 120px;
+}
+
+.container .order-information .panel .information .goods .panel-body .list-group .last {
+    border-right: none;
+}
+
+.container .pay .panel-heading {
+    font-size: 16px;
+    color: orange;
+    border-bottom: 1px solid tomato;
+}
+
+.container .pay .panel-body {
+    padding-top: 0;
+}
+
+.container .pay .panel-body .total-money {
+    padding-left: 30px;
+    height: 60px;
+    background-color: #FEF7E8;
+}
+
+.container .pay .panel-body .total-money span {
+    line-height: 60px;
+}
+
+.container .pay .panel-body .line {
+    height: 10px;
+}
+
+.container .pay .panel-body .pay-total-money {
+    height: 60px;
+    background-color: #FEF7E8;
+    padding-right: 30px;
+    margin-bottom: 15px;
+}
+
+.container .pay .panel-body .pay-total-money span {
+    line-height: 60px;
+    color: red;
+    font-size: 18px;
+}
+
+.container .pay .panel-body .submit {
+    padding-right: 30px;
+}
+
+.container .pay .panel-body .submit button {
+    outline: none;
+}
+
+/*# sourceMappingURL=./ensure_order.css.map */

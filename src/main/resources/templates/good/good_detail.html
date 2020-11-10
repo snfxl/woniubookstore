@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品详细信息</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/good_detail.css" th:href="@{/css/good_detail.css}">
+
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script th:replace="common/js_code::no-repeat-click"></script>
+
+    <script>
+        //购买数量加1
+        function up(object) {
+
+            //1.获取放数量的输入框
+            var numbersInput = $(object).parent().parent().prev();
+
+            //2.获取购买的数量
+            var numbers = Number(numbersInput.val());
+
+            //3.修改输入框的值
+            numbersInput.val(numbers + 1);
+
+        }
+
+        //购买数量减1
+        function down(object) {
+
+            //1.获取放数量的输入框
+            var numbersInput = $(object).parent().prev();
+
+            //2.获取购买的数量
+            var numbers = Number(numbersInput.val());
+
+            if (numbers === 0) {
+
+                return;
+            }
+
+            //3.修改输入框的值
+            numbersInput.val(numbers - 1);
+        }
+
+        //设置添加到购物车a标签的访问地址
+        function getUrl(object) {
+
+            //1.获取要添加的数量
+            var count = Number($("#count").val());
+
+            //2.判断是否为0
+            if (count === 0) {
+
+                alert("请设置数量！！");
+                return;
+            }
+
+            //3.判断商品库存是否够
+            //3.1 获取库存
+            var stock = Number($("#stock").text());
+            if (count > stock) {
+
+                alert("库存不足！！");
+                return;
+            }
+
+            //4.获取商品id
+            var goodId = Number($(object).attr("goodId"));
+
+            //5.设置请求地址
+            $(object).attr("href", "/addCart/" + goodId + "/" + count);
+        }
+
+        //设置立即购买a标签的访问地址
+        function getBuyUrl(object) {
+
+            //1.获取要添加的数量
+            var count = Number($("#count").val());
+
+            //2.判断是否为0
+            if (count === 0) {
+
+                alert("请设置数量！！");
+                return;
+            }
+
+            //3.判断商品库存是否够
+            //3.1 获取库存
+            var stock = Number($("#stock").text());
+            if (count > stock) {
+
+                alert("库存不足！！");
+                return;
+            }
+
+            //4.获取商品id
+            var goodId = Number($(object).attr("goodId"));
+
+            //5.设置请求地址
+            $(object).attr("href", "/checkOrderPageByAtOnce/" + goodId + "/" + count);
+        }
+
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.图书导航条  -->
+    <div th:replace="common/nav::book-nav"></div>
+    <!-- 3.搜索商品导航条 -->
+    <div th:replace="common/nav::search-nav"></div>
+    <!-- 4.主体部分 -->
+    <div class="main row">
+        <!-- 4.1图书图片 -->
+        <div class="div-img col-md-3">
+            <img th:src="@{/} + ${good.getImage()}" alt="">
+        </div>
+        <!-- 4.2详细图书信息 -->
+        <div class="col-md-9 book-information">
+            <div class="book-name">
+                书名：
+                <span th:text="${good.getName()}"></span>
+                <div class="book-number">
+                    图书编号：
+                    <span th:text="${good.getGoodNumber()}">
+                        325677568412351
+                    </span>
+                </div>
+            </div>
+            <!-- 图书详细信息 -->
+            <table class="table">
+                <tr>
+                    <td>销售价：</td>
+                    <td class="information sale-price">￥
+                        <span th:text="${good.getSalesPrice()}">51.90</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>市场价：</td>
+                    <td class="information market-price">￥
+                        <span th:text="${good.getMarketPrice()}">49.00</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>作者：</td>
+                    <td class="information" th:text="${good.getAuthor()}">Richard Thomas</td>
+                </tr>
+                <tr>
+                    <td>出版社：</td>
+                    <td class="information" th:text="${good.getPublisher()}">Random House US</td>
+                </tr>
+                <tr>
+                    <td>出版时间：</td>
+                    <td class="information" th:text="${good.getPublisherTime()}">2002-08-01</td>
+                </tr>
+                <tr>
+                    <td>库存：</td>
+                    <td class="information">现货(<span id="stock" th:text="${good.getStock()}">608</span>)</td>
+                </tr>
+                <tr>
+                    <td>顾客评分：</td>
+                    <td class="information score">
+                        <img th:src="@{/images/星星.png}" alt="" th:each="i:${#numbers.sequence(1,good.getScore())}">
+                        <span class="people-has-score">(已有0人评价)</span>
+                    </td>
+                </tr>
+            </table>
+            <!-- 购买按钮 -->
+            <div class="buy">
+                <div class="row buy-count">
+                    <label class="col-md-2" for="count">购买数量：</label>
+                    <input class="col-md-1 text-center" id="count" type="text" value="10">
+                    <div class="up-down col-md-1">
+                        <div>
+                            <a href="javascript:;" onclick="up(this)">
+                                <img class="up" th:src="@{/images/上.png}" alt="">
+                            </a>
+                        </div>
+                        <a href="javascript:;" onclick="down(this)">
+                            <img class="down" th:src="@{/images/下.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="row buy-button">
+                    <a onclick="noRepeatClick(this,2)" th:attr="goodId=${good.getId()}" class="btn btn-warning btn-lg"
+                       style="outline: none">立即购买</a>
+                    <a onclick="noRepeatClick(this,1)" th:attr="goodId=${good.getId()}" class="btn btn-primary btn-lg"
+                       style="outline: none">加入购物车</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 5 热卖商品 商品详情  顾客评价-->
+    <div class="row main-bottom">
+        <!-- 热卖商品 -->
+        <div class="col-md-3 hot-goods">
+            <div class="panel panel-default">
+                <!-- 标题 -->
+                <div class="panel-heading">
+                    热门商品推荐：
+                </div>
+                <div class="panel-body text-center">
+                    <div class="img-div">
+                        <img class="img" th:src="@{/} + ${hotGood.getImage()}" alt="">
+                    </div>
+                    <a href="#" th:href="@{/addGoodPage/50/50}" class="book-name">
+                        书名：
+                        <span th:text="${hotGood.getName()}">人间失格</span>
+                    </a>
+                    <div class="book-price">
+                        价格：
+                        <span th:text="${hotGood.getSalesPrice()}">￥69.90</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 商品详情  顾客评价 -->
+        <div class="col-md-9 good-detail">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button class="button-choose">
+                        <span>商品详情</span>
+                    </button>
+                    <button class="customer-evaluate">
+                        <span>顾客评价</span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 6.相关服务 -->
+    <div th:replace="common/bottom::services-bottom"></div>
+    <!-- 7.页脚 -->
+    <div th:replace="common/bottom::footer"></div>
+</div>
+</body>
+</html>

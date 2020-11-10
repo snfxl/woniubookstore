@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.OrderMapper">
+
+    <!-- 根据订单号删除订单-->
+    <delete id="deleteOrderByOrderNumber">
+
+        delete from mall_order where order_number = #{orderNumber}
+    </delete>
+
+    <!-- 通过订单号查询订单-->
+    <select id="queryOrderByOrderNumber" resultMap="queryOrderByOrderNumber">
+
+        select * from mall_order where order_number = #{orderNumber}
+    </select>
+
+    <resultMap id="queryOrderByOrderNumber" type="com.sn.woniubookstore.pojo.Order">
+
+        <id column="id" property="id"/>
+
+        <association property="orderItems"
+                     column="id"
+                     select="com.sn.woniubookstore.mapper.OrderItemMapper.queryOrderItemByOrderId">
+
+        </association>
+
+    </resultMap>
+
+    <!-- 获取自增主键-->
+    <!-- 创建订单-->
+    <insert id="createOrder" useGeneratedKeys="true" keyProperty="id">
+
+        insert into mall_order set <include refid="columnName"/>
+    </insert>
+
+    <!-- 修改订单-->
+    <update id="updateOrder">
+
+        update mall_order set <include refid="columnName"/>
+        where id = #{id}
+    </update>
+
+    <!-- 通过用户id查询订单-->
+    <select id="queryOrderByUserId" resultType="com.sn.woniubookstore.pojo.Order">
+
+        select * from mall_order where user_id = #{userId}
+    </select>
+
+    <sql id="columnName">
+
+        order_number = #{orderNumber},
+        user_id = #{userId},
+        order_time = #{orderTime},
+        accept_name = #{acceptName},
+        phone = #{phone},
+        address = #{address},
+        money = #{money},
+        pay_type = #{payType},
+        pay_time = #{payTime},
+        status = #{status}
+    </sql>
+</mapper>

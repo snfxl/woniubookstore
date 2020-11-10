@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>立即购买确认订单</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/cartGood.css" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" href="../css/ensure_order.css" th:href="@{/css/ensure_order.css}">
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <style>
+        .book-name {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+
+    <script th:replace="common/js_code::no-repeat-click"></script>
+
+    <script>
+
+        function submitFormAtOnceBuy(times) {
+
+            //1.获取支付方式
+            var payTypes = $(".pay-type");
+            for (var i = 0; i < payTypes.length; i++) {
+
+                if ($(payTypes[i]).prop("checked")) {
+
+                    $("#pay_type").val($(payTypes[i]).val());
+                }
+            }
+
+            //2.判断是否选择支付方式
+            if ($("#pay_type").val() == "") {
+
+                times = 0;
+                alert("请选择支付方式！");
+                return times;
+            }
+
+            //3.获取收货人信息
+            var receiveInformation = $(".receive-information");
+
+            for (var i = 0; i < receiveInformation.length; i++) {
+
+                var input = $(receiveInformation[i]).find(":input");
+
+                if ($(input).prop("checked")) {
+
+                    $("#accept_name").val($(input).attr("accept_name"));
+                    $("#phone").val($(input).attr("phone"));
+                    $("#address").val($(input).val());
+                    break;
+                }
+            }
+
+            //4.获取支付的价格
+            $("#money").val($("#actual_total_price").text());
+
+            //5.设置表单跳转的地址
+            $("#submit_order_form").attr("action", "/createOrder/" +
+                $("#goods_id").text() + "/" + $(".goodCount").text() + "?updateCart=1").submit();
+        }
+
+    </script>
+
+</head>
+
+<body onload="getPayMoney()">
+<div class="container">
+    <!-- 1.用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.当前位置 -->
+    <div th:replace="common/nav::now-position"></div>
+    <!-- 3.购物状态 -->
+    <div th:replace="common/nav::shopping-status"></div>
+    <!-- 4.填写核对订单信息 -->
+    <div class="row order-information">
+        <div class="panel panel-default">
+            <div class="panel-heading title">填写核对订单信息：</div>
+            <div class="panel-body information">
+                <!-- 4.1 收货人信息-->
+                <div class="row common">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">收货人信息：</div>
+                        <div class="panel-body">
+                            <div class="panel panel-default address">
+                                <div class="panel-heading">
+                                    <span>
+                                        常用收获地址：
+                                    </span>
+                                </div>
+                                <div class="panel-body row">
+                                    <!-- 收货人信息-->
+                                    <div style="margin-left: 65px;color: tomato;font-size: 20px;font-weight: bold"
+                                         th:if="${not #strings.isEmpty(addressMessage)}"
+                                         th:text="${addressMessage}"></div>
+                                    <div class="custom-control custom-radio receive-information"
+                                         th:each="address:${addresses}">
+                                        <input type="radio" id="customRadio1" name="address"
+                                               th:attr="accept_name=${address.getAcceptName()},
+                                               phone=${address.getPhone()}"
+                                               th:value="${address.getProvince() + address.getCity() + address.getArea() + address.getAddress()}"
+                                               class="custom-control-input col-md-1"
+                                               th:checked="${address.getType()=='y'}">
+                                        <label class="custom-control-label col-md-11" for="customRadio1">
+                                            <div class="col-md-1" th:text="${address.getAcceptName()}">
+                                                sn
+                                            </div>
+                                            <div class="col-md-2" th:text="${address.getPhone()}">
+                                                18983497278
+                                            </div>
+                                            <div class="col-md-9" th:text="
+                                                ${address.getProvince() + address.getCity() + address.getArea() + address.getAddress()}">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4.2支付方式 -->
+                <div class="row common pay-method">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">支付方式：</div>
+                        <div class="panel-body">
+                            <div class="panel panel-default">
+                                <div class="panel-body row">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio3" name="payType" th:value="1"
+                                               class="custom-control-input col-md-1 pay-type">
+                                        <label class="custom-control-label col-md-11" for="customRadio3">
+                                            <div class="col-md-2">
+                                                支付宝
+                                            </div>
+                                            <div class="col-md-10">
+                                                支付手续费：
+                                                <span>
+                                                    ￥0.00
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio4" name="payType" th:value="2"
+                                               class="custom-control-input col-md-1 pay-type">
+                                        <label class="custom-control-label col-md-11" for="customRadio4">
+                                            <div class="col-md-2">
+                                                货到付款
+                                            </div>
+                                            <div class="col-md-10">
+                                                支付手续费：
+                                                <span>
+                                                    ￥0.00
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4.3购买的商品 -->
+                <div class="row common goods">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">购买的商品：</div>
+                        <div class="panel-body">
+                            <!-- 列表头 -->
+                            <div class="panel-heading row">
+                                    <span class="col-md-2 text-center">
+                                        图片
+                                    </span>
+                                <span class="col-md-6 text-center">
+                                        商品名称
+                                    </span>
+                                <span class="col-md-1 text-center">
+                                        单价
+                                    </span>
+                                <span class="col-md-1 text-center">
+                                        数量
+                                    </span>
+                                <span class="col-md-2 text-center last">
+                                        小计
+                                    </span>
+                            </div>
+
+                            <!-- 购物车商品内容 -->
+                            <ul class="list-group row good">
+                                <li id="goods_id" th:text="${goodsId}" style="display: none"></li>
+                                <li class="col-md-2 text-center list-group-item">
+                                    <img class="img" th:src="@{/} + ${orderItemAtOnce.getImage()}"
+                                         alt="">
+                                </li>
+                                <li class="col-md-6 text-center list-group-item book-name"
+                                    th:text="${orderItemAtOnce.getGoodName()}">
+                                    人间失格
+                                </li>
+                                <li class="col-md-1 text-center list-group-item">
+                                    ￥
+                                    <span th:text="${orderItemAtOnce.getPrice()}">69.80</span>
+                                </li>
+                                <li class="col-md-1 text-center count list-group-item">
+                                    <span class="goodCount"
+                                          th:text="${orderItemAtOnce.getNumbers()}">4</span>
+                                </li>
+                                <li class="col-md-2 text-center list-group-item last">
+                                    ￥
+                                    <span class="one-good-total-price"
+                                          th:text="${orderItemAtOnce.getTotalPrice()}">279.20</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 5.结算信息 -->
+    <div class="row pay">
+        <div class="panel panel-default">
+            <div class="panel-heading">结算信息：</div>
+            <div class="panel-body">
+                <div class="row total-money">
+                    商品总金额：<span th:text="${orderItemAtOnce.getTotalPrice()}" id="total_price">297.20</span> +
+                    运费总计：<span>0.00</span>
+                </div>
+                <div class="line"></div>
+                <div class="row text-right pay-total-money">
+                    应付总金额：<span th:text="${orderItemAtOnce.getTotalPrice()}" id="actual_total_price">297.20</span>元
+                </div>
+                <div class="row text-right submit">
+                    <button id="submit_order_btn" onclick="noRepeatClick(this,5)" class="btn btn-warning ">
+                        确认无误，提交订单
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="submit_order_form" method="post">
+    <!-- 收件人-->
+    <input type="hidden" id="accept_name" name="acceptName">
+    <!-- 收件人电话-->
+    <input type="hidden" id="phone" name="phone">
+    <!-- 收件人地址-->
+    <input type="hidden" id="address" name="address">
+    <!-- 商品总额-->
+    <input type="hidden" id="money" name="money">
+    <!-- 支付方式-->
+    <input type="hidden" id="pay_type" name="payType">
+</form>
+</body>
+</html>

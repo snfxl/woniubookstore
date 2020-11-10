@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+<!-- 图书信息-->
+<div class="book_info" th:fragment="book-info(good,pathType)">
+    <div class="book_name">
+        <span class="sp3" id="book_name" th:text="'书名：' + ${good.getName()}"></span>
+    </div>
+    <div class="book_author">
+        <span class="sp3" th:text="'作者：' + ${good.getAuthor()}">霍金</span>
+    </div>
+    <div class="book_price">
+        <span class="sp3" th:text="'价格：' + ${good.getSalesPrice()}">￥30.00</span>
+    </div>
+    <div class="book_sales">
+        <span class="sp3" th:text="'销量：' + ${good.getSaleCounts()}">230</span>
+    </div>
+    <div class="book_amount">
+        <span class="sp3" th:text="'库存：' + ${good.getStock()}">1000</span>
+    </div>
+    <div class="book_add">
+        <a class="btn btn-info" style="outline: none" th:href="@{/addGoodPage/50/} + ${good.getId()}">
+            加入购物车
+        </a>
+    </div>
+</div>
+
+
+</body>
+</html>

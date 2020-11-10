@@ -1,0 +1,64 @@
+.container .get-order .information {
+  height: 400px;
+  padding-bottom: 0;
+}
+.container .get-order .information .common .panel {
+  box-shadow: none;
+  border: none;
+  margin-bottom: 0;
+}
+.container .get-order .information .common .panel .success-order {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 30px;
+}
+.container .get-order .information .common .panel .success-order .img-div {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.container .get-order .information .common .panel .success-order .img-div img {
+  height: 40px;
+}
+.container .get-order .information .common .panel .success-order span {
+  margin-left: 20px;
+}
+.container .get-order .information .common .panel .panel-heading span {
+  margin-left: 105px;
+}
+.container .get-order .information .common .panel .panel-body {
+  margin-top: 30px;
+  width: 800px;
+  margin-left: 180px;
+  border-left: 1px solid tomato;
+  border-right: 1px solid tomato;
+  border-top: 1px solid tomato;
+  background-color: #FEF3D7;
+  padding: 0;
+}
+.container .get-order .information .common .panel .panel-body li {
+  background-color: #FEF3D7;
+  border-bottom: tomato 1px solid;
+  padding: 0;
+  padding-left: 20px;
+  height: 35px;
+  border-radius: 0;
+}
+.container .get-order .information .common .panel .panel-body li span {
+  line-height: 35px;
+  color: red;
+}
+.container .get-order .information .common .panel .pay-at-once {
+  margin-top: 35px;
+}
+.container .get-order .information .common .panel .pay-at-once .btn {
+  width: 100px;
+  outline: none;
+}
+.container .services {
+  border-bottom: none;
+}
+.container .services a {
+  text-decoration: none;
+  color: black;
+}
+/*# sourceMappingURL=./success_submit_order.css.map */

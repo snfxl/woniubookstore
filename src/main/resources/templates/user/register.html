@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="./css/login.css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="./fonts/iconfont.css" th:href="@{/fonts/iconfont.css}">
+    <link rel="stylesheet" href="./css/register.css" th:href="@{/css/register.css}">
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script>
+
+        //点击验证码图片时修改验证码
+        function changeCode(obj) {
+            obj.src = "/kaptchaServlet";
+        }
+    </script>
+
+
+</head>
+
+<body>
+<div class="container">
+    <form class="form-signin" th:action="@{/register}" method="post">
+        <h1 class="form-signin-heading">
+            请进行注册:
+            <span style="color: orange"
+                  th:text="${#strings.isEmpty(registerPageErrorMessage) ? '' : registerPageErrorMessage}">
+            </span>
+        </h1>
+        <div class="form-control">
+            <label for="account">账号：</label>
+            <input id="account" type="text" class="input-text" name="account" placeholder="请输入账号"
+                   th:value="${#strings.isEmpty(account) ? '' : account}">
+        </div>
+        <div class="form-control">
+            <label for="password">密码：</label>
+            <input id="password" type="password" class="input-text" name="password" placeholder="请输入密码"
+                   th:value="${#strings.isEmpty(password) ? '' : password}">
+        </div>
+        <div class="form-control">
+            <label for="repeatedPassword">重复密码：</label>
+            <input id="repeatedPassword" type="password" class="input-text" name="repeatedPassword" placeholder="请重复密码"
+                   th:value="${#strings.isEmpty(repeatedPassword) ? '' : repeatedPassword}">
+        </div>
+        <div class="form-control code">
+            <label for="repeatedPassword">验证码：</label>
+            <input type="text" class="input-text" name="code" placeholder="点击图片刷新">
+        </div>
+        <span class="code-img">
+            <img src="/kaptchaServlet" onclick="changeCode(this)"
+                 style="width: 110px" height="40px" alt="">
+        </span>
+        <div class="register-button">
+            <button class="btn btn-lg btn-primary btn-block register" id="register">注册</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

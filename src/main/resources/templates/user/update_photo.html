@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/orders.css" th:href="@{/css/orders.css}">
+    <link rel="stylesheet" href="../css/personal_center.css" th:href="@{/css/personal_center.css}">
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.引入用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.引入图书导航条  -->
+    <div th:replace="common/nav::book-nav"></div>
+    <!-- 3.搜索商品导航条 -->
+    <div th:replace="common/nav::search-nav"></div>
+    <!-- 4.主体部分 -->
+    <div class="main row">
+        <!--4.1 侧边栏  会员中心-->
+        <div th:replace="common/nav::user-sidebar"></div>
+        <!-- 主体内容 -->
+        <div class="col-md-9 my-orders">
+            <!-- 4.2 个人中心 -->
+            <div class="panel panel-default personal-center">
+                <div class="panel-heading">
+                    修改头像
+                </div>
+                <div class="panel-body">
+                    <div class="change-head">
+                        <form th:action="@{/updatePhoto}" enctype="multipart/form-data" method="post">
+                            <input class="btn btn-info" id="update_photo" type="file" name="photo" style="margin-bottom: 20px">
+                            <input type="submit" th:value="确定" style="outline: none" class="btn btn-warning">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

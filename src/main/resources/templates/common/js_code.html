@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script th:fragment="no-repeat-click">
+
+        //1.获取点击次数
+        let times = 0;
+
+        //2.获取当前点击时间(毫秒数)
+        let nowClickTime;
+
+        //3.获取上一次点击的时间
+        let lastClickTime;
+
+        //4.点击时执行的方法
+        function noRepeatClick(object, method) {
+
+            //4.1 判断是否是第一次点击
+            if (times === 0) {
+
+                //记录第一次点击的时间
+                lastClickTime = new Date().getTime();
+                //增加点击次数
+                times++;
+                //执行对应逻辑
+                if (method == 1) {
+
+                    getUrl(object);
+                } else if (method == 2) {
+
+                    getBuyUrl(object);
+                } else if (method == 3) {
+
+                    goPay(object);
+                } else if (method == 4) {
+
+                    times = submitOrderForm(times);
+                } else if (method == 5) {
+
+                    times = submitFormAtOnceBuy(times);
+                } else if (method == 6) {
+
+                    times = ensurePay(object, times);
+                } else if (method == 7) {
+
+                    addAddress();
+                } else if (method == 8) {
+                    down(object);
+                } else if (method == 9) {
+                    up(object);
+                }
+            } else {
+
+                //4.2 不是第一次点击
+                //.1 获取当前点击时间
+                nowClickTime = new Date().getTime();
+
+                //.2 判断间隔时间是否在3秒内  说明是3秒内多次点击 不执行对应逻辑
+                if (nowClickTime - lastClickTime < 3000) {
+
+                    alert("3Miao 进来了");
+
+                    //重置a标签访问地址 如果不重置在第一次访问时 已经为a标签的href赋过值
+                    if (method != 4 && method != 5 && method != 8 && method != 9) {
+
+                        $(object).attr("href", "javascript:;");
+                    }
+                } else {
+
+                    //.3 大于3秒可以执行
+                    if (method == 1) {
+
+                        getUrl(object);
+                    } else if (method == 2) {
+
+                        getBuyUrl(object);
+                    } else if (method == 3) {
+
+                        goPay(object);
+                    } else if (method == 4) {
+
+                        submitOrderForm(times);
+                    } else if (method == 5) {
+
+                        submitFormAtOnceBuy(times);
+                    } else if (method == 6) {
+
+                        ensurePay(object, times);
+                    } else if (method == 7) {
+
+                        addAddress();
+                    } else if (method == 8) {
+                        alert(times + "减少")
+                        alert("dayu3miao 减少")
+                        down(object);
+                    } else if (method == 9) {
+                        alert(times + "增加")
+                        alert("dayu3miao 增加")
+                        up(object);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

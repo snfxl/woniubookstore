@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.CartGoodMapper">
+
+
+    <!--    <select id="queryByUserIdAndGoodId" resultType="com.sn.woniubookstore.pojo.CartGood">-->
+
+    <!--        select * from mall_cart_good where user_id=#{userId} and goods_id=#{goodsId}-->
+    <!--    </select>-->
+
+    <!-- 保存商品项-->
+    <insert id="saveCartGood">
+
+        insert into mall_cart_good set
+        <include refid="columnName"/>
+    </insert>
+
+    <!-- 根据商品id 更新商品项-->
+    <update id="updateCartGood">
+        update mall_cart_good set
+        <include refid="columnName"/>
+        where goods_Id = #{goodsId}
+    </update>
+
+    <!-- 根据商品id删除商品项-->
+    <delete id="deleteGoodById">
+
+        delete from mall_cart_good where goods_id=#{goodsId}
+    </delete>
+    <!-- 删除变成订单项的商品项-->
+    <delete id="deleteByChangeItem">
+        delete from mall_cart_good where change_order_item=#{changeOrderItem}
+    </delete>
+    <!-- 根据购物车id查询商品项-->
+    <select id="queryByCartId" resultType="com.sn.woniubookstore.pojo.CartGood">
+        select * from mall_cart_good where cart_id=#{cart_id}
+    </select>
+
+    <!-- 根据商品id查询商品项-->
+    <select id="queryByGoodsId" resultType="com.sn.woniubookstore.pojo.CartGood">
+        select * from mall_cart_good where goods_id=#{goodsId}
+    </select>
+
+    <!-- 查询所有变成订单项的商品项-->
+    <select id="queryByChangeItem" resultType="com.sn.woniubookstore.pojo.CartGood">
+        select * from mall_cart_good where change_order_item=#{changeOrderItem}
+    </select>
+
+    <sql id="columnName">
+        cart_id=#{cartId},
+        goods_id=#{goodsId},
+        price=#{price},
+        numbers=#{numbers},
+        add_time=#{addTime},
+        total_price=#{totalPrice},
+        image=#{image},
+        good_name=#{goodName},
+        change_order_item=#{changeOrderItem}
+    </sql>
+
+</mapper>

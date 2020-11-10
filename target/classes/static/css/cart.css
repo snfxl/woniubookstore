@@ -1,0 +1,146 @@
+.container .now-position {
+  border-top: 3px #F76F10 solid;
+  margin-bottom: 0;
+  padding-left: 40px;
+}
+.container .now-position li .active {
+  color: orange;
+}
+.container .now-position li span {
+  position: relative;
+  top: 15px;
+}
+.container .shopping-status {
+  height: 69px;
+  background: #f7f6f6 url(../images/sprites_2.gif) 55px -400px no-repeat;
+}
+.container .shopping-status ul {
+  position: relative;
+  left: 320px;
+  top: 20px;
+}
+.container .shopping-status ul li {
+  height: 31.61290323px;
+  width: 250px;
+  background: #FFE8D7 url("../images/sprites_2.gif") right -492px no-repeat;
+}
+.container .shopping-status ul li span {
+  position: relative;
+  top: 5px;
+  font-size: 15px;
+}
+.container .shopping-status ul .current-other-li {
+  background: #FFE8D7 url(../images/sprites_2.gif) right -524px no-repeat;
+}
+.container .shopping-status ul .current-position {
+  background-color: #ED6807;
+}
+.container .shopping-status ul .current-position span {
+  color: #fff;
+}
+.container .shopping-status ul .last {
+  background-position: right -620px;
+}
+.container .goods .title {
+  margin-left: 30px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: orangered;
+}
+.container .goods .good-list {
+  border-bottom: transparent;
+  box-shadow: none;
+}
+.container .goods .good-list .panel-heading {
+  margin: 0;
+  padding: 0;
+  height: 40px;
+}
+.container .goods .good-list .panel-heading span {
+  line-height: 40px;
+  border-right: #E8E8E8 2px solid;
+}
+.container .goods .good-list .panel-heading span input {
+  margin-right: 10px;
+}
+.container .goods .good-list .panel-heading .last {
+  border-right: transparent;
+}
+.container .goods .good-list .panel-body {
+  height: 120px;
+  padding: 0;
+}
+.container .goods .good-list .panel-body li {
+  padding: 0;
+  border: transparent;
+  line-height: 120px;
+  border-right: #E8E8E8 2px solid;
+  border-bottom: #E8E8E8 2px solid;
+  overflow: hidden;
+}
+.container .goods .good-list .panel-body li .img {
+  height: 97px;
+}
+.container .goods .good-list .panel-body li span {
+  color: orange;
+}
+.container .goods .good-list .panel-body .count {
+  padding: 0;
+}
+.container .goods .good-list .panel-body .count .update-count {
+  width: 15px;
+}
+.container .goods .good-list .panel-body .count input {
+  height: 16px;
+  width: 35px;
+}
+.container .goods .good-list .panel-body .last {
+  border-right: transparent;
+}
+.container .goods .good-list .panel-body .last .btn {
+  height: 30px;
+  width: 70px;
+  outline: none;
+}
+.container .goods .total-money .panel-heading span {
+  color: orange;
+}
+.container .goods .total-money .panel-body button {
+  outline: none;
+}
+.container .hot-goods .panel .panel-heading {
+  color: orangered;
+  font-size: 16px;
+}
+.container .hot-goods .panel .panel-body {
+  height: 250px;
+  overflow: hidden;
+  padding: 0;
+}
+.container .hot-goods .panel .panel-body li {
+  height: 250px;
+  border: none;
+  border-right: 2px solid #E8E8E8;
+}
+.container .hot-goods .panel .panel-body li .img-div {
+  height: 150px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.container .hot-goods .panel .panel-body li .img-div .img {
+  height: 100%;
+}
+.container .hot-goods .panel .panel-body li .book-name {
+  text-decoration: none;
+  color: #333333;
+}
+.container .hot-goods .panel .panel-body li .book-name span {
+  color: orchid;
+}
+.container .hot-goods .panel .panel-body li .book-price {
+  position: relative;
+  left: -3px;
+}
+.container .hot-goods .panel .panel-body li .book-price span {
+  color: orange;
+}

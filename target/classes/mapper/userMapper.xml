@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sn.woniubookstore.mapper.UserMapper">
+
+    <!--
+        useGeneratedKeys 获取自增主动键的值
+        keyProperty 将值赋给pojo的哪个属性
+    -->
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
+        insert into mall_user (<include refid="userColumnName"/>)
+        values (#{account},#{password},#{email},#{score},#{registerTime},#{status});
+    </insert>
+
+    <!-- 更新用户-->
+    <update id="updateUser">
+
+        update mall_user set password=#{password},avatar=#{avatar}
+        where id=#{id}
+    </update>
+
+
+    <select id="queryUserByAccount" resultType="com.sn.woniubookstore.pojo.User">
+
+        select * from mall_user where account=#{account}
+    </select>
+    
+    <sql id="userColumnName">
+        account,`password`,email,score,register_time,status
+    </sql>
+    
+</mapper>

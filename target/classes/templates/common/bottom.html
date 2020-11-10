@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 底部内容-->
+<!-- 5.相关服务 -->
+<div class="row services" th:fragment="services-bottom">
+    <div class="col-md-1"></div>
+    <div class="panel panel-default col-md-10">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <!-- 购物指南 -->
+            <div class="col-md-2">
+                <div class="panel-heading text-center">购物指南</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">订单状态</a></li>
+                        <li class="list-group-item text-center"><a href="#">购物流程</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 支付帮助 -->
+            <div class="col-md-2">
+                <div class="panel-heading text-center">支付帮助</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">支付帮助</a></li>
+                        <li class="list-group-item text-center"><a href="#">在线支付</a></li>
+                        <li class="list-group-item text-center"><a href="#">货到付款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 配送帮助 -->
+            <div class="col-md-2">
+                <div class="panel-heading text-center">配送帮助</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">EMS/邮政普包</a></li>
+                        <li class="list-group-item text-center"><a href="#">商品验货与签收</a></li>
+                        <li class="list-group-item text-center"><a href="#">配送范围及运费</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 售后服务 -->
+            <div class="col-md-2">
+                <div class="panel-heading text-center">售后服务</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">售后服务</a></li>
+                        <li class="list-group-item text-center"><a href="#">发票制度</a></li>
+                        <li class="list-group-item text-center"><a href="#">退货说明</a></li>
+                        <li class="list-group-item text-center"><a href="#">换货说明</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 帮助信息 -->
+            <div class="col-md-2">
+                <div class="panel-heading text-center">帮助信息</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">友情链接</a></li>
+                        <li class="list-group-item text-center"><a href="#">联系客服</a></li>
+                        <li class="list-group-item text-center"><a href="#">找回密码</a></li>
+                        <li class="list-group-item text-center"><a href="#">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<!-- 6.页脚 -->
+<div class="row footer text-center" th:fragment="footer">
+        <span>
+            sn.蜗牛书城.Copyright &copy;2020
+        </span>
+</div>
+</body>
+</html>

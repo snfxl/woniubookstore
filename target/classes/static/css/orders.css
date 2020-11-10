@@ -1,0 +1,83 @@
+.main .side-bar {
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 15px;
+  border: 1px solid tomato;
+  width: 276px;
+  height: 386px;
+}
+.main .side-bar .panel {
+  border: transparent;
+  box-shadow: none;
+}
+.main .side-bar span {
+  margin-right: 2px;
+}
+.main .side-bar span img {
+  height: 20px;
+}
+.main .side-bar .title {
+  background-color: #F2751F;
+  height: 50px;
+  border-radius: 0;
+}
+.main .side-bar .title h3 {
+  font-size: 20px;
+  color: blanchedalmond;
+  margin-top: 4px;
+}
+.main .side-bar .title h3 .font {
+  position: relative;
+  top: 2px;
+}
+.main .side-bar .panel-body {
+  border: transparent;
+  box-shadow: none;
+}
+.main .side-bar .panel-body .common {
+  border: transparent;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+.main .side-bar .panel-body .common .panel-heading {
+  background-color: tomato;
+}
+.main .side-bar .panel-body .common .panel-heading .font {
+  color: #FFEBCD;
+  position: relative;
+  top: 0.5px;
+}
+.main .side-bar .panel-body .common .panel-body {
+  border: transparent;
+}
+.main .side-bar .panel-body .common .panel-body .my-order {
+  margin-left: 15px;
+}
+.main .side-bar .panel-body .common .panel-body a {
+  color: #C5C4C2;
+  text-decoration: none;
+}
+.main .side-bar .panel-body .common .panel-body li {
+  border: transparent;
+}
+.main .my-orders {
+  padding-right: 0;
+  padding-left: 0;
+}
+.main .my-orders .panel-heading {
+  font-size: 18px;
+  color: orangered;
+}
+.main .my-orders .panel-body .table {
+  margin-top: -3px;
+}
+.main .my-orders .panel-body .table .head {
+  background-color: #FEF3D9;
+}
+.main .my-orders .panel-body .table .order-number {
+  color: orange;
+}
+.main .my-orders .panel-body .page .pagination {
+  margin: 0;
+}
+/*# sourceMappingURL=./orders.css.map */

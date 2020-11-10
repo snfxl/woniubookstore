@@ -1,0 +1,43 @@
+spring:
+  mvc:
+    #识别"_method"请求参数  使用restful风格
+    hiddenmethod:
+      filter:
+        enabled: true
+  #配置数据源
+  datasource:
+    username: root
+    password: snbsnfxl
+    url: jdbc:mysql://localhost:3306/woniu_bookstore?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #配置数据源类型
+    type: com.alibaba.druid.pool.DruidDataSource
+  #关闭thymeleaf模板缓存
+  thymeleaf:
+    cache: false
+
+mybatis:
+  #指定mapper映射文件路径
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #驼峰命名
+    map-underscore-to-camel-case: true
+    #控制台打印sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#打印mybatis日志文件
+logging:
+  level:
+    com:
+      sn:
+        market_management:
+          mapper: debug
+#分页插件配置
+pagehelper:
+  #数据库类型
+  helper-dialect: mysql
+  params: count=countSql
+  #当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询
+  reasonable: false
+  #支持通过 Mapper 接口参数来传递分页参数，默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页
+  support-methods-arguments: true

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" href="../css/orders.css" th:href="@{/css/orders.css}">
+
+    <script src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+
+        $(function () {
+
+            $("#change-default").click(function () {
+
+                if ($(this).text() == "设为默认") {
+
+                    $("#default").text("是");
+                    $(this).text("取消默认");
+                }else {
+
+                    $(this).text("设为默认");
+                    $("#default").text("否");
+                }
+            });
+        });
+
+        function updateAddress(object) {
+
+            //1.获取要修改的地址的当前行
+            var row = $(object).parent().parent().parent().find("tr").eq(1);
+
+            //2.获取行中的所有的单元格
+            var tds = $(row).find("td");
+
+            //3.为表单中各项赋值
+            $("#id").val($(tds).eq(0).find(":input").attr("addressId"));
+            $("#accept_name").val($(tds).eq(0).find(":input").val());
+            $("#phone").val($(tds).eq(1).find(":input").val());
+            $("#province").val($(tds).eq(2).find(":input").val());
+            $("#city").val($(tds).eq(3).find(":input").val());
+            $("#area").val($(tds).eq(4).find(":input").val());
+            $("#address").val($(tds).eq(5).find(":input").val());
+            $("#type").val();
+
+            if ($(tds).eq(6).text() == '是') {
+
+                $("#type").val('y');
+            } else {
+
+                $("#type").val('n');
+            }
+
+            //3.提交表单
+            $("#update_address").attr("action", "/updateAddress").submit();
+        }
+
+    </script>
+
+    <style>
+        .default-address {
+
+            color: tomato;
+        }
+
+        .update-good td input {
+
+            width: 90px;
+            border: transparent;
+            outline: none;
+        }
+
+        .update-button td {
+
+            border-top: none;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <!-- 1.引入用户导航条 -->
+    <div th:replace="common/nav::user-nav"></div>
+    <!-- 2.图书导航条  -->
+    <div th:replace="common/nav::book-nav"></div>
+    <!-- 3.搜索商品导航条 -->
+    <div th:replace="common/nav::search-nav"></div>
+    <!-- 4.主体部分 -->
+    <div class="main row">
+
+        <!-- 侧边栏 -->
+        <div th:replace="common/nav::user-sidebar"></div>
+        <!-- 收货地址 -->
+        <div class="col-md-9 my-orders">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>
+                        修改地址：
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr class="text-center head">
+                            <td>收件人</td>
+                            <td>电话</td>
+                            <td>省</td>
+                            <td>市</td>
+                            <td>地区</td>
+                            <td>具体地址</td>
+                            <td>默认地址</td>
+                        </tr>
+                        <!-- 商品内容 -->
+                        <tr class="text-center update-good">
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input th:attr="addressId=${address.getId()}" class="text-center" type="text" th:value="${address.getAcceptName()}">
+                            </td>
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input class="text-center" type="text" th:value="${address.getPhone()}">
+                            </td>
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input class="text-center" type="text" th:value="${address.getProvince()}">
+                            </td>
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input class="text-center" type="text" th:value="${address.getCity()}">
+                            </td>
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input class="text-center" type="text" th:value="${address.getArea()}">
+                            </td>
+                            <td th:classappend="${address.getType() == 'y'?'default-address':''}">
+                                <input class="text-center" type="text" th:value="${address.getAddress()}">
+                            </td>
+                            <td id="default" th:classappend="${address.getType() == 'y'?'default-address':''}"
+                                th:text="${address.getType() == 'y'?'是':'否'}">
+                            </td>
+                        </tr>
+                        <tr class="text-center update-button">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button id="change-default" th:text="${address.getType()=='n'?'设为默认':'取消默认'}"
+                                        class="btn btn-info" style="outline: none">
+                                    设为默认
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="updateAddress(this)" class="btn btn-warning" style="outline: none">确定</button>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="update_address" method="post">
+        <input id="id" type="hidden" name="id">
+        <input id="accept_name" type="hidden" name="acceptName">
+        <input id="phone" type="hidden" name="phone">
+        <input id="province" type="hidden" name="province">
+        <input id="city" type="hidden" name="city">
+        <input id="area" type="hidden" name="area">
+        <input id="address" type="hidden" name="address">
+        <input id="type" type="hidden" name="type">
+        <input th:value="${pageNum}" type="hidden" name="pageNum">
+    </form>
+
+</div>
+</body>
+</html>

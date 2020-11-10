@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="./css/login.css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="./fonts/iconfont.css" th:href="@{/fonts/iconfont.css}">
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script type="text/javascript">
+
+        //点击验证码图片时修改验证码
+        function changeCode(obj) {
+
+            obj.src = "/kaptchaServlet";
+        }
+
+    </script>
+
+</head>
+
+<body>
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" method="post">
+        <h1 class="form-signin-heading">
+            蜗牛图书商城
+            <div style="color: orange;line-height: 0;text-align: left"
+                 th:text="${#strings.isEmpty(loginPageErrorMessage) ? '' : loginPageErrorMessage}">
+            </div>
+        </h1>
+
+        <div class="form-control" style="margin-top: 20px">
+            <i class="iconfont icon-xiaoren"></i>
+            <input type="text" class="input-text" name="account" placeholder="请输入账号"
+                   th:value="${#strings.isEmpty(account) ? '' : account}">
+        </div>
+        <div class="form-control">
+            <i class="iconfont icon-mima"></i>
+            <input type="password" class="input-text" name="password" placeholder="请输入登录密码"
+                   th:value="${#strings.isEmpty(password) ? '' : password}">
+        </div>
+        <div class="form-control code">
+            <input type="text" class="input-text" name="code" placeholder="点击图片刷新验证码">
+        </div>
+        <span class="code-img">
+            <img src="/kaptchaServlet" onclick="changeCode(this)"
+                  style="width: 110px" height="40px" alt="">
+        </span>
+        <div class="login-button">
+            <button class="btn btn-lg btn-primary btn-block login" style="outline: none">登录</button>
+            <a class="btn btn-lg btn-primary btn-block register" th:href="@{/registerPage}">
+                注册
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>
